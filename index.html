@@ -94,6 +94,11 @@ $('speak').addEventListener('click',()=>{
  speechSynthesis.speak(u);
 });
 $('stop').addEventListener('click',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();$('voiceStatus').textContent='Playback stopped.';});
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('generateVideo').onclick = function() {
+    alert('Generate clicked');
+  };
+});
 </script>
  
 <button class="primary" id="generateVideo">▶ Generate Video</button>
