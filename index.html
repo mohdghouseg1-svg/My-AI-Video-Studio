@@ -1,108 +1,125 @@
-k<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My AI Video Studio</title>
 <style>
-:root{--bg:#0b1020;--panel:#131b31;--panel2:#192440;--text:#f4f6ff;--muted:#aab4cf;--accent:#8b7cff;--accent2:#40d6bd;--line:#293451}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#25204c 0,transparent 32%),var(--bg);color:var(--text);font:16px/1.5 Arial,sans-serif}
-header{padding:22px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:16px;flex-wrap:wrap}
-.brand{font-size:20px;font-weight:800;letter-spacing:.2px}.brand span{color:var(--accent2)}
-.tag{font-size:12px;color:#c9c4ff;border:1px solid #514b89;border-radius:99px;padding:5px 10px}
-main{max-width:1100px;margin:38px auto;padding:0 20px}.hero{text-align:center;margin-bottom:30px}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:0 0 12px}.hero h1 em{font-style:normal;color:var(--accent2)}.hero p{color:var(--muted);margin:0}
-.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.panel{background:linear-gradient(160deg,var(--panel),#10172a);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 14px 45px #0003}.panel h2{font-size:19px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
-label{display:block;font-size:13px;font-weight:700;margin:15px 0 7px;color:#dce2f7}
-textarea,select,input{width:100%;background:#0b1327;border:1px solid #34415f;color:var(--text);border-radius:10px;padding:12px;font:inherit;outline:none}
-textarea:focus,select:focus,input:focus{border-color:var(--accent)}textarea{min-height:125px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-button{border:0;border-radius:10px;padding:12px 16px;font-weight:700;font-size:14px;cursor:pointer}
-.primary{background:linear-gradient(90deg,var(--accent),#6b9cff);color:white;width:100%;margin-top:17px}.secondary{background:#24314f;color:#eef2ff;border:1px solid #3b4b70}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
-.output{background:#0a1225;border:1px dashed #3a496b;border-radius:12px;padding:14px;min-height:120px;color:#dce4ff;white-space:pre-wrap;font-size:14px}
-.note{font-size:12px;color:var(--muted);margin-top:13px}.status{color:var(--accent2);font-size:13px;min-height:20px;margin-top:10px}
-.preview{display:flex;align-items:center;justify-content:center;text-align:center;min-height:200px;background:linear-gradient(135deg,#202a4c,#17152e);border:1px solid #384366;border-radius:13px;color:#c6cce2;padding:20px}
-footer{text-align:center;color:#8490ad;font-size:12px;padding:30px 15px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}header{padding:18px 5%}main{margin:26px auto}}
+*{box-sizing:border-box}
+body{margin:0;padding:20px;font-family:Arial;background:#101426;color:white}
+.container{max-width:750px;margin:auto;background:#1b2340;padding:22px;border-radius:16px}
+h1{text-align:center;color:#65d6ff}
+.subtitle{text-align:center;color:#c3c9dc}
+textarea{width:100%;min-height:150px;padding:14px;margin:15px 0;border-radius:10px;border:1px solid #536080;background:#11182d;color:white;font-size:16px}
+button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:9px;background:#3978f6;color:white;font-size:16px;font-weight:bold}
+button:disabled{opacity:.6}
+.output{background:#11182d;padding:15px;margin-top:15px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}
+video{width:100%;margin-top:15px;border-radius:10px}
+.status{color:#65d6ff;margin-top:12px;overflow-wrap:anywhere}
+a{color:#65d6ff}
 </style>
 </head>
 <body>
-<header><div class="brand">✦ My <span>AI</span> Video Studio</div><div class="tag">FREE STARTER VERSION</div></header>
-<main>
-<section class="hero"><h1>Turn your ideas into <em>stories</em></h1><p>Write a prompt, plan your scenes, and create a voiceover — all in one simple workspace.</p></section>
-<div class="grid">
-<section class="panel">
-<h2>1. Create your video idea</h2><p class="sub">Start with a short description of the video you want.</p>
-<label for="prompt">Video prompt</label><textarea id="prompt" placeholder="Example: A young village boy helps an old man during a rainy evening. Make it emotional and cinematic."></textarea>
-<div class="row">
-<div><label for="kind">Video type</label><select id="kind"><option>Story</option><option>Islamic educational story</option><option>Love story</option><option>Real estate advertisement</option><option>YouTube Shorts</option><option>Motivational video</option></select></div>
-<div><label for="lang">Language</label><select id="lang"><option>English</option><option>Hindi</option><option>Urdu</option><option>Telugu</option></select></div>
+<div class="container">
+<h1>🎬 My AI Video Studio</h1>
+<p class="subtitle">Create AI Videos With Voiceover</p>
+<h3>Enter Your Video Prompt</h3>
+<textarea id="prompt" placeholder="Write your story or video prompt here..."></textarea>
+<button onclick="createScenePlan()">🎞️ Create Scene Plan</button>
+<button onclick="downloadScenePlan()">⬇️ Download Scene Plan</button>
+<button onclick="playVoice()">🔊 Play Voice</button>
+<button onclick="stopVoice()">⏹ Stop Voice</button>
+<h3>Scene Plan</h3>
+<div id="sceneOutput" class="output">Your scene plan will appear here.</div>
+<button id="generateButton" onclick="generateVideo()">🚀 Generate AI Video</button>
+<div id="status" class="status">Ready to create your video.</div>
+<div id="videoOutput"></div>
+<a id="downloadVideo" style="display:none" download="my-ai-video.mp4">⬇️ Download Video</a>
 </div>
-<label for="duration">Video length</label><select id="duration"><option>30 seconds</option><option>15 seconds</option><option>60 seconds</option><option>2 minutes</option></select>
-<button class="primary" id="plan">Create scene plan</button>
-<div class="status" id="planStatus" aria-live="polite"></div>
-<label>Scene plan</label><div class="output" id="scenes">Your scene plan will appear here.</div>
-<div class="actions"><button class="secondary" id="download">Download scene plan</button></div>
-<p class="note">This starter version creates a basic scene outline in your browser. It does not yet generate an actual video file.</p>
-</section>
-<section class="panel">
-<h2>2. Create a voiceover</h2><p class="sub">Type or paste narration, then listen using a voice available on your device.</p>
-<label for="voiceText">Voiceover script</label><textarea id="voiceText" placeholder="Type the words you want the narrator to speak..."></textarea>
-<div class="row">
-<div><label for="voiceLang">Voice language</label><select id="voiceLang"><option value="en">English</option><option value="hi">Hindi</option><option value="ur">Urdu</option><option value="te">Telugu</option></select></div>
-<div><label for="rate">Speaking speed</label><select id="rate"><option value="0.9">Slow</option><option value="1" selected>Normal</option><option value="1.15">Fast</option></select></div>
-</div>
-<div class="actions"><button class="primary" style="width:auto;flex:1" id="speak">▶ Play voice</button><button class="secondary" id="stop">Stop</button></div>
-<div class="status" id="voiceStatus" aria-live="polite"></div>
-<div style="margin-top:20px"><h2>3. Video preview</h2><p class="sub">Video generation will be connected in the next development step.</p><div class="preview">🎬<br><br>Your generated video preview will appear here after an AI video service is connected.</div></div>
-<p class="note">Voice playback uses your browser/device speech voices. Available languages and voice quality depend on your device. No audio is uploaded.</p>
-</section>
-</div>
-</main>
-<footer>My AI Video Studio · Starter website · Built to grow step by step</footer>
 <script>
-const $=id=>document.getElementById(id);
-let lastPlan='';
-$('plan').addEventListener('click',()=>{
- const prompt=$('prompt').value.trim();
- if(!prompt){$('planStatus').textContent='Please write a video idea first.';return;}
- const type=$('kind').value, lang=$('lang').value, duration=$('duration').value;
- const beats=[
-  ['Opening shot','Introduce the place, time, and atmosphere.'],
-  ['Main moment','Show the main character and the important action.'],
-  ['Turning point','Reveal the key emotion, discovery, or change.'],
-  ['Ending','Close with a memorable final image or message.']
- ];
- lastPlan=`MY AI VIDEO STUDIO — SCENE PLAN\nVideo type: ${type}\nLanguage: ${lang}\nLength: ${duration}\n\nIDEA:\n${prompt}\n\n`;
- beats.forEach((b,i)=>lastPlan+=`SCENE ${i+1}: ${b[0]}\n${b[1]}\nVisual direction: Cinematic framing, natural movement, consistent characters, clear lighting.\n\n`);
- $('scenes').textContent=lastPlan;
- $('planStatus').textContent='Scene plan created. You can download it or use it with a video AI service.';
-});
-$('download').addEventListener('click',()=>{
- if(!lastPlan){$('planStatus').textContent='Create a scene plan first.';return;}
- const blob=new Blob([lastPlan],{type:'text/plain'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-ai-video-scene-plan.txt';a.click();URL.revokeObjectURL(a.href);
-});
-$('speak').addEventListener('click',()=>{
- const text=$('voiceText').value.trim();
- if(!text){$('voiceStatus').textContent='Please enter your voiceover script.';return;}
- if(!('speechSynthesis' in window)){ $('voiceStatus').textContent='Speech playback is not supported in this browser.';return; }
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);u.lang=$('voiceLang').value;u.rate=parseFloat($('rate').value);
- u.onstart=()=> $('voiceStatus').textContent='Playing voiceover…';
- u.onend=()=> $('voiceStatus').textContent='Voiceover finished.';
- u.onerror=()=> $('voiceStatus').textContent='Could not play this voice. Try another language available on your device.';
- speechSynthesis.speak(u);
-});
-$('stop').addEventListener('click',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();$('voiceStatus').textContent='Playback stopped.';});
-document.addEventListener('DOMContentLoaded', function() {
-  const button = document.getElementById('generateVideo');
+let scenes = [];
 
-  button.onclick = function() 
-  };
-});
+function createScenePlan() {
+ const prompt = document.getElementById("prompt").value.trim();
+ if (!prompt) return alert("Please enter your video prompt.");
+ const sentences = prompt.split(/(?<=[.!?।])\s+/).filter(s => s.trim());
+ const parts = sentences.length > 1 ? sentences : prompt.split(",").filter(s => s.trim());
+ const sceneParts = parts.length ? parts : [prompt];
+ scenes = sceneParts.map((part,index) => ({scene:index+1,description:part.trim(),duration:5}));
+ document.getElementById("sceneOutput").textContent = scenes.map(s =>
+ "Scene "+s.scene+"\nDuration: "+s.duration+" seconds\nDescription: "+s.description
+ ).join("\n\n");
+ document.getElementById("status").textContent = "Scene Plan created successfully!";
+}
+
+function downloadScenePlan() {
+ if (!scenes.length) return alert("Please create a Scene Plan first.");
+ const text = scenes.map(s => "Scene "+s.scene+"\nDuration: "+s.duration+" seconds\nDescription: "+s.description).join("\n\n");
+ const url = URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
+ const link = document.createElement("a");
+ link.href=url;
+ link.download="My-AI-Video-Scene-Plan.txt";
+ link.click();
+ URL.revokeObjectURL(url);
+}
+
+function playVoice() {
+ if (!scenes.length) return alert("Please create a Scene Plan first.");
+ if (!("speechSynthesis" in window)) return alert("Voice playback is not supported.");
+ stopVoice();
+ const speech = new SpeechSynthesisUtterance(scenes.map(s=>s.description).join(". "));
+ speech.lang="en-IN";
+ speech.rate=.9;
+ window.speechSynthesis.speak(speech);
+}
+
+function stopVoice() {
+ if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+}
+
+const WORKER_URL = "";
+
+async function generateVideo() {
+ const prompt=document.getElementById("prompt").value.trim();
+ if (!prompt) return alert("Please enter your video prompt.");
+ if (!scenes.length) return alert("Please create a Scene Plan first.");
+ if (!WORKER_URL) return alert("Cloudflare Worker is not connected yet.");
+
+ const button=document.getElementById("generateButton");
+ const status=document.getElementById("status");
+ button.disabled=true;
+ status.textContent="Sending request to AI video server...";
+
+ try {
+  const response=await fetch(WORKER_URL.replace(/\/$/,"")+"/api/generate",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({prompt,scenes})
+  });
+  const data=await response.json();
+  if (!response.ok) throw new Error(data.error||"Video request failed.");
+  if (!data.videoUrl) throw new Error("Video URL not received from server.");
+
+  const videoUrl=new URL(data.videoUrl,WORKER_URL);
+  if (!["https:","http:"].includes(videoUrl.protocol)) throw new Error("Invalid video URL.");
+
+  const video=document.createElement("video");
+  video.controls=true;
+  video.playsInline=true;
+  video.src=videoUrl.href;
+  document.getElementById("videoOutput").replaceChildren(video);
+
+  const download=document.getElementById("downloadVideo");
+  download.href=videoUrl.href;
+  download.style.display="block";
+  status.textContent="Your AI video is ready!";
+ } catch(error) {
+  status.textContent="Error: "+error.message;
+ } finally {
+  button.disabled=false;
+ }
+}
 </script>
- 
-<button class="primary" id="generateVideo">▶ Generate Video</button>
-
 </body>
 </html>
