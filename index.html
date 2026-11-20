@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+k<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -95,8 +95,10 @@ $('speak').addEventListener('click',()=>{
 });
 $('stop').addEventListener('click',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();$('voiceStatus').textContent='Playback stopped.';});
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('generateVideo').onclick = function() {
-    alert('Generate clicked');
+  const button = document.getElementById('generateVideo');
+
+  button.onclick = function() {
+    alert('Example: Generate Video button is working!');
   };
 });
 </script>
