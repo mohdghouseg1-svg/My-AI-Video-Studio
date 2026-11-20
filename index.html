@@ -95,7 +95,8 @@ $('speak').addEventListener('click',()=>{
 });
 $('stop').addEventListener('click',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();$('voiceStatus').textContent='Playback stopped.';});
 </script>
+ 
+<button class="primary" id="generateVideo">▶ Generate Video</button>
+
 </body>
 </html>
-
-<button class="primary" id="generateVideo">▶ Generate Video</button>
